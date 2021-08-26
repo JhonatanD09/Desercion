@@ -38,9 +38,7 @@ public class Perceptron {
 			{ 0, 1, 0, 0, 0, 0, 0 }, 
 			{ 0, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0 }, 
-			{ 0, 0, 0, 0, 0, 0, 0 },
-			{ 0, 0, 0, 0, 1, 1, 0 }, 
-			{ 0, 0, 0, 1, 1, 1, 1 },
+			{ 0, 0, 0, 0, 0, 0, 0 }
 			};
 	public double pesoX1, pesoX2, pesoX3, pesoX4, pesoX5, pesoX6, baias;
 
@@ -49,12 +47,12 @@ public class Perceptron {
 	 * baias
 	 */
 	public Perceptron() {
-		this.pesoX1 = 0;
-		this.pesoX2 = 0;
+		this.pesoX1 = 0.1;
+		this.pesoX2 = -0.2;
 		this.pesoX3 = 0;
-		this.pesoX4 = 0;
-		this.pesoX5 = 0;
-		this.pesoX6 = 0;
+		this.pesoX4 = 0.3;
+		this.pesoX5 = 0.2;
+		this.pesoX6 = 0.01;
 		this.baias = 0;
 	}
 
@@ -81,6 +79,7 @@ public class Perceptron {
 		System.out.println("Iniciando Aprendizaje....");
 		for (int i = 0; i < iteratios; i++) {
 			evaluarPesos();
+			System.out.println("------------------------------------------------------------------");
 		}
 		System.out.println("Aprendizaje terminado");
 	}
@@ -151,7 +150,7 @@ public class Perceptron {
 			pesoX6 = pesoX6 + delta6;
 			baias = baias - (APRENDIZAJE * error);
 
-			textPerceptron(dataSet[i][0], dataSet[i][1], dataSet[i][2], dataSet[i][3], dataSet[i][4], dataSet[i][5]);
+			System.out.println(textPerceptron(dataSet[i][0], dataSet[i][1], dataSet[i][2], dataSet[i][3], dataSet[i][4], dataSet[i][5]));
 		}
 	}
 
@@ -180,13 +179,17 @@ public class Perceptron {
 	 * @return deserta o no deserta, segun sea el caso
 	 */
 	public String textPerceptron(int x1, int x2, int x3, int x4, int x5, int x6) {
-		return (hardLimit(calculeYValue(x1, x2, x3, x4, x5, x6)) == 1) ? "Desertor" : "No desertor";
+		return (hardLimit(calculeYValue(x1, x2, x3, x4, x5, x6)) == 1) ? "Desertor" : "No Desertor";
 	}
 
 	public static void main(String[] args) {
 		Perceptron perceptron = new Perceptron();
 		perceptron.aprendizaje(1000);
 		perceptron.mostrarEcuaciones();
+		
 		System.out.println("porcentaje de efectividad :" + perceptron.porcentajeAcierto() + "%");
+		
+//		System.out.println(perceptron.textPerceptron(0, 0, 0, 0, 1, 1)); // 0
+//		System.out.println(perceptron.textPerceptron(0, 0, 0, 1, 1, 1)); // 1
 	}
 }
