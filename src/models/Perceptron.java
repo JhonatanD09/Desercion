@@ -84,39 +84,6 @@ public class Perceptron {
 		System.out.println("Aprendizaje terminado");
 	}
 
-	/**
-	 * Evalua la funcion conseguida en el aprendizaje con unos datos de prueba para
-	 * calcular el porcentaje de efectividad del perceptron
-	 * 
-	 * @return porcentaje de efectividad del perceptron
-	 */
-	public double porcentajeAcierto() {
-		int count = 0;
-		for (int i = 0; i < dataSetTest.length; i++) {
-			int value = hardLimit(calculeYValue(dataSetTest[i][0], dataSetTest[i][1], dataSetTest[i][2],
-					dataSetTest[i][3], dataSetTest[i][5], dataSetTest[i][5]));
-			if (value == dataSetTest[i][6]) {
-				count++;
-			}
-		}
-		return (count / dataSetTest.length) * 100;
-	}
-
-	/**
-	 * Calcula el valor y evaluado en la ecuacion de aprendizaje Los parametros son
-	 * cada uno de los valores por los cuales se multiplican los pesos
-	 * 
-	 * @param x1
-	 * @param x2
-	 * @param x3
-	 * @param x4
-	 * @param x5
-	 * @param x6
-	 * @return el valor de y evaluado en la ecuacion de aprendizaje
-	 */
-	private double calculeYValue(int x1, int x2, int x3, int x4, int x5, int x6) {
-		return x1 * pesoX1 + x2 * pesoX2 + x3 * pesoX3 + x4 * pesoX4 + x5 * pesoX5 + x6 * pesoX6 - baias;
-	}
 
 	/**
 	 * Recorre el data set y va calculando valores y de cada dato del data set de
@@ -153,6 +120,41 @@ public class Perceptron {
 			System.out.println(textPerceptron(dataSet[i][0], dataSet[i][1], dataSet[i][2], dataSet[i][3], dataSet[i][4], dataSet[i][5]));
 		}
 	}
+	
+	/**
+	 * Evalua la funcion conseguida en el aprendizaje con unos datos de prueba para
+	 * calcular el porcentaje de efectividad del perceptron
+	 * 
+	 * @return porcentaje de efectividad del perceptron
+	 */
+	public double porcentajeAcierto() {
+		int count = 0;
+		for (int i = 0; i < dataSetTest.length; i++) {
+			int value = hardLimit(calculeYValue(dataSetTest[i][0], dataSetTest[i][1], dataSetTest[i][2],
+					dataSetTest[i][3], dataSetTest[i][5], dataSetTest[i][5]));
+			if (value == dataSetTest[i][6]) {
+				count++;
+			}
+		}
+		return (count / dataSetTest.length) * 100;
+	}
+
+	/**
+	 * Calcula el valor y evaluado en la ecuacion de aprendizaje Los parametros son
+	 * cada uno de los valores por los cuales se multiplican los pesos
+	 * 
+	 * @param x1
+	 * @param x2
+	 * @param x3
+	 * @param x4
+	 * @param x5
+	 * @param x6
+	 * @return el valor de y evaluado en la ecuacion de aprendizaje
+	 */
+	private double calculeYValue(int x1, int x2, int x3, int x4, int x5, int x6) {
+		return x1 * pesoX1 + x2 * pesoX2 + x3 * pesoX3 + x4 * pesoX4 + x5 * pesoX5 + x6 * pesoX6 - baias;
+	}
+
 
 	/**
 	 * Se encarga de concatenar y mostar por consola la ecuacion de el perceptron
